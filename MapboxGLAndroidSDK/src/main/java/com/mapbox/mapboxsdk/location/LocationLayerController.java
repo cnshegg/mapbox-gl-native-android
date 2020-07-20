@@ -2,6 +2,7 @@ package com.mapbox.mapboxsdk.location;
 
 import android.graphics.Bitmap;
 import android.graphics.PointF;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -258,6 +259,7 @@ final class LocationLayerController {
       @Override
       public void onNewAnimationValue(LatLng value) {
         locationLayerRenderer.setLatLng(value);
+        Log.v("LayerController", "kl-OnNewAnimation:" + value.toString());
       }
   };
 

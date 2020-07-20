@@ -3,6 +3,7 @@ package com.mapbox.mapboxsdk.location;
 import android.animation.Animator;
 import android.location.Location;
 import android.os.SystemClock;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -110,7 +111,8 @@ final class LocationAnimatorCoordinator {
     LatLng[] latLngValues = getLatLngValues(previousLayerLatLng, newLocations);
     Float[] bearingValues = getBearingValues(previousLayerBearing, newLocations);
     updateLayerAnimators(latLngValues, bearingValues);
-
+    Log.d("LocationAnimator", "kl-previousLayerLatLng:" + previousLayerLatLng.toString());
+    Log.d("LocationAnimator", "kl-newLocations:" + newLocations[0].toString());
     // replace the animation start with the camera's previous value
     latLngValues[0] = previousCameraLatLng;
     if (isGpsNorth) {
@@ -147,6 +149,7 @@ final class LocationAnimatorCoordinator {
 
       animationDuration = Math.min(animationDuration, MAX_ANIMATION_DURATION_MS);
     }
+    Log.d("LocationAnimator", "kl-animationDuration:" + animationDuration);
 
     playAnimators(animationDuration,
       ANIMATOR_LAYER_LATLNG,
