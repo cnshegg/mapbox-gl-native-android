@@ -27,6 +27,7 @@ public class LocalGlyphRasterizer {
     public int advance;
     public Bitmap glyphBitmap;
   }
+
   @NonNull
   private final GlyphMetrics glyphMetrics;
   @NonNull
@@ -59,7 +60,8 @@ public class LocalGlyphRasterizer {
    * @param bold If true, use Typeface.BOLD option
    * @param glyphID 16-bit Unicode BMP codepoint to draw
    *
-   * @return Return GlyphMetrics that contains all the necessary information to display the character in the requested tile.
+   * @return Return GlyphMetrics that contains all the necessary information to display
+   *         the character in the requested tile.
    */
   @WorkerThread
   protected GlyphMetrics getGlyphMetrics(String fontFamily, boolean bold, char glyphID) {
@@ -78,6 +80,9 @@ public class LocalGlyphRasterizer {
     glyphMetrics.top = Math.abs(bounds.top);
     glyphMetrics.advance = Math.round(paint.measureText(glyph, 0, 1));
 
+    if (glyphMetrics.width == 0 && glyphMetrics.height == 0) {
+      return glyphMetrics;
+    }
     // Draw glyph on the canvas with the 3 pixels' boarder padding from the left and top
     float x = 3 - bounds.left;
     float y = 3 - bounds.top;
